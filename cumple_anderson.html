@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 Feliz Cumpleaños Anderson 🎂</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(-45deg, #6a11cb, #2575fc, #ff4da6, #ff9f43);
+            background-size: 400% 400%;
+            animation: fondo 12s ease infinite;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        @keyframes fondo {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .card {
+            width: min(900px, 95%);
+            background: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, .25);
+            transition: .8s ease;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 10px 25px;
+            background: white;
+            color: #7c3aed;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, .7);
+        }
+        
+        .subtitulo {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+        
+        #frase {
+            font-size: 1.3rem;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .botones {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        button {
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: .3s;
+        }
+        
+        button:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+        
+        .btn1 {
+            background: white;
+            color: #7c3aed;
+        }
+        
+        .btn2 {
+            background: #ff4da6;
+            color: white;
+        }
+        
+        .contador {
+            margin-top: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .mensaje {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, .12);
+            padding: 20px;
+            border-radius: 20px;
+        }
+        
+        .galeria {
+            margin-top: 35px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        
+        .item {
+            background: rgba(255, 255, 255, .12);
+            padding: 25px;
+            border-radius: 20px;
+            transition: .3s;
+        }
+        
+        .item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .balloon {
+            position: fixed;
+            bottom: -150px;
+            width: 80px;
+            height: 100px;
+            border-radius: 50%;
+            opacity: .8;
+            animation: subir linear infinite;
+        }
+        
+        .balloon::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 70px;
+            background: white;
+            left: 50%;
+            top: 100px;
+        }
+        
+        @keyframes subir {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-130vh);
+            }
+        }
+        
+        .confeti {
+            position: fixed;
+            top: -10px;
+            animation: caer 4s linear forwards;
+        }
+        
+        @keyframes caer {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+            }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: .9rem;
+        }
+        
+        @media(max-width:768px) {
+            .card {
+                padding: 25px;
+            }
+            #frase {
+                font-size: 1.05rem;
+            }
+            .subtitulo {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="globos"></div>
+
+    <section class="hero">
+
+        <div class="card" id="card">
+
+            <div class="badge">🎉 Cumpleaños Especial 🎉</div>
+
+            <h1 id="titulo"></h1>
+
+            <p class="subtitulo">
+                Hoy celebramos a una persona increíble. Que este día esté lleno de alegría, risas y momentos inolvidables.
+            </p>
+
+            <div id="frase"></div>
+
+            <div class="botones">
+                <button class="btn1" onclick="nuevaFrase()">✨ Nueva Frase</button>
+                <button class="btn2" onclick="sorpresa()">🎁 Sorpresa</button>
+            </div>
+
+            <div class="contador">
+                Felicitaciones enviadas: <span id="clics">0</span> 🎉
+            </div>
+
+            <div class="mensaje">
+                💙 Anderson, que nunca te falten motivos para sonreír, metas por alcanzar y personas que te aprecien.
+            </div>
+
+            <div class="galeria">
+
+                <div class="item">
+                    😎<br><br> Gran amigo
+                </div>
+
+                <div class="item">
+                    🚀<br><br> Lleno de sueños
+                </div>
+
+                <div class="item">
+                    💪<br><br> Siempre fuerte
+                </div>
+
+                <div class="item">
+                    🌟<br><br> Persona especial
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        🎂 Hecho especialmente para Anderson 🎂
+    </footer>
+
+    <script>
+        const nombre = "🎂 ANDERSON 🎂";
+        let i = 0;
+
+        function escribirNombre() {
+            if (i < nombre.length) {
+                document.getElementById("titulo").innerHTML += nombre.charAt(i);
+                i++;
+                setTimeout(escribirNombre, 150);
+            }
+        }
+        escribirNombre();
+
+        const frases = [
+            "🎂 Hoy celebramos a una persona increíble llamada Anderson.",
+            "🥳 Que cada sueño que tengas se acerque más a convertirse en realidad.",
+            "🌟 Nunca dejes de brillar con tu propia luz.",
+            "🚀 Que este nuevo año venga cargado de éxitos.",
+            "💙 Gracias por ser un gran amigo y una gran persona.",
+            "🎉 Que la felicidad te acompañe todos los días.",
+            "🍰 Disfruta este día rodeado de quienes más te quieren.",
+            "✨ Mereces todo lo bueno que la vida puede ofrecer.",
+            "🏆 Que nunca falten metas por cumplir.",
+            "🌈 Que cada día te sorprenda con algo maravilloso.",
+            "🎁 Hoy es tu día, disfrútalo al máximo.",
+            "🔥 Sigue conquistando nuevos retos.",
+            "⭐ Eres una persona única y especial.",
+            "😎 Que la diversión nunca falte.",
+            "🎊 Hoy no se cuentan años, se cuentan experiencias.",
+            "🚴‍♂️ Nunca dejes de perseguir tus sueños.",
+            "🎶 Que la alegría y la música llenen tu día.",
+            "🍕 Que nunca falten buenos amigos y buenos momentos.",
+            "🌍 Que vivas aventuras inolvidables.",
+            "💫 Este será un año lleno de oportunidades.",
+            "👑 Hoy el protagonista eres tú.",
+            "🎇 Tu sonrisa ilumina cualquier lugar.",
+            "⚡ Sigue siendo esa gran persona que todos aprecian.",
+            "🎈 Que este cumpleaños sea tan increíble como tú."
+        ];
+
+        const colores = [
+            "rgba(255,255,255,.15)",
+            "rgba(255,99,132,.25)",
+            "rgba(54,162,235,.25)",
+            "rgba(255,206,86,.25)",
+            "rgba(75,192,192,.25)",
+            "rgba(153,102,255,.25)",
+            "rgba(255,159,64,.25)",
+            "rgba(0,255,127,.20)",
+            "rgba(255,20,147,.20)",
+            "rgba(0,191,255,.20)"
+        ];
+
+        let contador = 0;
+
+        function nuevaFrase() {
+
+            const frase = frases[Math.floor(Math.random() * frases.length)];
+
+            document.getElementById("frase").innerHTML = frase;
+
+            const color = colores[Math.floor(Math.random() * colores.length)];
+
+            document.getElementById("card").style.background = color;
+
+            contador++;
+            document.getElementById("clics").innerHTML = contador;
+
+            crearConfeti(40);
+        }
+
+        function sorpresa() {
+
+            crearConfeti(250);
+
+            alert(
+                `🎉 ¡FELIZ CUMPLEAÑOS ANDERSON! 🎂
+
+Que este nuevo año de vida esté lleno de salud, felicidad, éxitos y momentos inolvidables.
+
+¡Disfruta tu día al máximo! 🥳`
+            );
+        }
+
+        document.getElementById("frase").innerHTML =
+            frases[Math.floor(Math.random() * frases.length)];
+
+        setInterval(() => {
+            nuevaFrase();
+        }, 5000);
+
+        function crearConfeti(cantidad) {
+
+            for (let i = 0; i < cantidad; i++) {
+
+                const confeti = document.createElement("div");
+
+                confeti.classList.add("confeti");
+
+                confeti.style.left = Math.random() * 100 + "vw";
+
+                confeti.style.width = (Math.random() * 10 + 5) + "px";
+                confeti.style.height = (Math.random() * 10 + 5) + "px";
+
+                confeti.style.background =
+                    `hsl(${Math.random()*360},100%,50%)`;
+
+                document.body.appendChild(confeti);
+
+                setTimeout(() => {
+                    confeti.remove();
+                }, 4000);
+            }
+        }
+
+        function crearGlobos() {
+
+            const colores = [
+                "#ff4da6",
+                "#00c3ff",
+                "#ffcc00",
+                "#7c3aed",
+                "#00ff99"
+            ];
+
+            for (let i = 0; i < 20; i++) {
+
+                const globo = document.createElement("div");
+
+                globo.classList.add("balloon");
+
+                globo.style.left = Math.random() * 100 + "vw";
+
+                globo.style.background =
+                    colores[Math.floor(Math.random() * colores.length)];
+
+                globo.style.animationDuration =
+                    (8 + Math.random() * 10) + "s";
+
+                globo.style.animationDelay =
+                    Math.random() * 5 + "s";
+
+                document.getElementById("globos").appendChild(globo);
+            }
+        }
+
+        crearGlobos();
+        crearConfeti(150);
+    </script>
+
+</body>
+
+</html>
